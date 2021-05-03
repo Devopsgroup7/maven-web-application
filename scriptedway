@@ -1,4 +1,19 @@
 node
 {
+def mavenhome = tool name: "maven"
 stage('github')
 {
+git branch: 'development', credentialsId: 'b49d2a54-c040-492d-85e3-679c2fd053f8', url: 'https://github.com/Devopsgroup7/maven-web-application.git'
+}
+stage('maven')
+{
+sh "${mavenhome}/bin/mvn clean package"
+}
+stage('sonarqube')
+{
+sh "${mavenhome}/bin/mvn sonar:sonar"
+}
+stage('nexus')
+{
+sh "${mavenhome}/bin/mvn deploy"
+}
