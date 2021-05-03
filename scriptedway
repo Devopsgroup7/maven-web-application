@@ -17,4 +17,7 @@ stage('nexus')
 {
 sh "${mavenhome}/bin/mvn deploy"
 }
+stage('tomcat')
+{
+
 }
